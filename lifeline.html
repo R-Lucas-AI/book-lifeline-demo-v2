@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命线回看 — Book Lifeline</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'ui-sans-serif', 'sans-serif', 'system-ui'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          colors: {
+            brand: { 50:'#e8f2ff',100:'#cfe5ff',200:'#9fcbff',300:'#66abff',400:'#2e8dff',500:'#007aff',600:'#0064d6',700:'#004fad',800:'#003b82',900:'#00275a' },
+            surface: { 50:'#ffffff',100:'#f7f7fa',200:'#f2f2f7',300:'#e5e5ea',400:'#d1d1d6',500:'#aeaeb2' },
+            ink: { 800:'#1d1d1f',700:'#3c3c43',500:'#6e6e73',400:'#8e8e93',300:'#aeaeb2' }
+          },
+          borderRadius: { 'brand': '1.2rem' }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --brand-50: #e8f2ff; --brand-100: #cfe5ff; --brand-200: #9fcbff; --brand-300: #66abff;
+      --brand-400: #2e8dff; --brand-500: #007aff; --brand-600: #0064d6; --brand-700: #004fad;
+      --brand-800: #003b82; --brand-900: #00275a;
+      --background-50: #ffffff; --background-100: #f7f7fa; --background-200: #f2f2f7;
+      --background-300: #e5e5ea; --background-400: #d1d1d6; --background-500: #aeaeb2;
+      --text-800: #1d1d1f; --text-700: #3c3c43; --text-500: #6e6e73; --text-400: #8e8e93;
+      --text-300: #aeaeb2; --text-200: #c7c7cc;
+      --state-success: #34c759; --state-error: #ff3b30;
+      --radius: 1.2rem;
+      --font-sans: 'DM Sans', ui-sans-serif, sans-serif, system-ui;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--background-50); color: var(--text-800); }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-success {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out both;
+    }
+    .animate-fade-in-up-delay-1 { animation-delay: 0.1s; }
+    .animate-fade-in-up-delay-2 { animation-delay: 0.2s; }
+    .animate-fade-in-up-delay-3 { animation-delay: 0.3s; }
+    .animate-fade-in-up-delay-4 { animation-delay: 0.4s; }
+    .animate-fade-in-up-delay-5 { animation-delay: 0.5s; }
+    .animate-fade-in-up-delay-6 { animation-delay: 0.6s; }
+
+    .animate-pulse-success {
+      animation: pulse-success 0.6s ease-in-out 0.3s both;
+    }
+
+    /* Timeline line */
+    .timeline-line {
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #9fcbff;
+    }
+    .timeline-dot {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .timeline-dot-active {
+      background-color: #007aff;
+      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
+    }
+    .timeline-dot-skipped {
+      background-color: #d1d1d6;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-surface-50 antialiased">
+
+  <!-- Top bar -->
+  <header class="animate-fade-in-up pt-8 pb-2 px-6">
+    <div class="max-w-[720px] mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-semibold text-ink-800 tracking-tight">Book Lifeline</span>
+        <span class="text-sm text-ink-400 font-normal">书的生命线</span>
+      </div>
+      <span class="text-xs text-ink-300 font-mono">LIFELINE REVIEW</span>
+    </div>
+  </header>
+
+  <main class="max-w-[720px] mx-auto px-6 pb-20">
+
+    <!-- Success header -->
+    <section class="animate-fade-in-up animate-fade-in-up-delay-1 mt-12 mb-10 text-center">
+      <div class="flex justify-center mb-5">
+        <div class="animate-pulse-success w-6 h-6 rounded-full bg-[#34c759] flex items-center justify-center">
+          <i class="ti ti-check text-white text-sm"></i>
+        </div>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-semibold text-ink-800 tracking-tight leading-tight">
+        已保存到你的阅读生命线
+      </h1>
+      <p class="mt-3 text-base text-ink-500 leading-relaxed max-w-md mx-auto">
+        这条新节点已进入你的阅读生命线，与 2 条旧回声建立了连接。
+      </p>
+    </section>
+
+    <!-- New ReadingNode summary -->
+    <section class="animate-fade-in-up animate-fade-in-up-delay-2 mb-10">
+      <p class="text-xs font-medium text-ink-400 tracking-widest uppercase mb-3">新 ReadingNode</p>
+      <div class="bg-surface-50 border border-surface-300 rounded-brand p-5 relative">
+        <!-- "New" badge -->
+        <span class="absolute top-3 right-4 text-[10px] font-medium tracking-wider uppercase text-brand-500 bg-brand-50 px-2 py-0.5 rounded-full">
+          new
+        </span>
+
+        <!-- Book pill -->
+        <div class="mb-3">
+          <span class="inline-block text-sm font-medium text-brand-700 bg-brand-100 px-3 py-1 rounded-full">《百年孤独》</span>
+        </div>
+
+        <!-- Moment type pill -->
+        <div class="mb-4 flex items-center gap-2">
+          <span class="inline-block text-xs font-mono font-medium text-ink-500 bg-surface-200 px-2.5 py-1 rounded-full">insight</span>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          <span class="text-xs text-ink-500 bg-surface-200 px-2.5 py-1 rounded-full">孤独感</span>
+          <span class="text-xs text-ink-500 bg-surface-200 px-2.5 py-1 rounded-full">文学与现实</span>
+          <span class="text-xs text-ink-500 bg-surface-200 px-2.5 py-1 rounded-full">代际传承</span>
+        </div>
+
+        <!-- Core thought -->
+        <p class="text-sm text-ink-700 leading-relaxed line-clamp-3">
+          马尔克斯笔下的孤独并非个体情感，而是一种集体的、代际传递的宿命……
+        </p>
+        <button class="mt-1 text-xs text-brand-500 hover:text-brand-600 font-medium transition-colors">展开</button>
+      </div>
+    </section>
+
+    <!-- Timeline / Connection visualization -->
+    <section class="animate-fade-in-up animate-fade-in-up-delay-3 mb-12">
+      <p class="text-xs font-medium text-ink-400 tracking-widest uppercase mb-6">生命线连接</p>
+
+      <div class="relative pl-10">
+        <!-- Vertical timeline line -->
+        <div class="timeline-line"></div>
+
+        <!-- New node anchor -->
+        <div class="relative flex items-start gap-4 mb-8">
+          <div class="absolute -left-10 flex justify-center w-[32px]">
+            <div class="timeline-dot timeline-dot-active mt-1"></div>
+          </div>
+          <div class="text-xs font-mono text-brand-500 font-medium mt-0.5">当前节点</div>
+        </div>
+
+        <!-- Connection 1 — preserved -->
+        <div class="relative flex items-start gap-4 mb-8">
+          <div class="absolute -left-10 flex justify-center w-[32px]">
+            <div class="timeline-dot timeline-dot-active mt-1.5"></div>
+          </div>
+          <div class="flex-1 bg-surface-50 border border-surface-300 rounded-brand p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-sm text-ink-700 leading-snug">2024.07 日记 — 读完《霍乱时期的爱情》后的感受</p>
+                <div class="flex items-center gap-2 mt-2">
+                  <span class="text-[11px] font-mono font-medium text-ink-500 bg-surface-200 px-2 py-0.5 rounded-full">echo</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 flex-shrink-0 mt-0.5">
+                <i class="ti ti-circle-check-filled text-sm text-[#34c759]"></i>
+                <span class="text-xs text-[#34c759] font-medium">已保留</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection 2 — preserved -->
+        <div class="relative flex items-start gap-4 mb-8">
+          <div class="absolute -left-10 flex justify-center w-[32px]">
+            <div class="timeline-dot timeline-dot-active mt-1.5"></div>
+          </div>
+          <div class="flex-1 bg-surface-50 border border-surface-300 rounded-brand p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-sm text-ink-700 leading-snug">2025.03 AI协作笔记 — 创造力是重新组合旧元素</p>
+                <div class="flex items-center gap-2 mt-2">
+                  <span class="text-[11px] font-mono font-medium text-ink-500 bg-surface-200 px-2 py-0.5 rounded-full">source</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 flex-shrink-0 mt-0.5">
+                <i class="ti ti-circle-check-filled text-sm text-[#34c759]"></i>
+                <span class="text-xs text-[#34c759] font-medium">已保留</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection 3 — skipped -->
+        <div class="relative flex items-start gap-4 mb-2 opacity-50">
+          <div class="absolute -left-10 flex justify-center w-[32px]">
+            <div class="timeline-dot timeline-dot-skipped mt-1.5"></div>
+          </div>
+          <div class="flex-1 bg-surface-100 border border-surface-300 rounded-brand p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-sm text-ink-400 leading-snug line-through decoration-surface-400">《世界简史》— 关于历史循环论的笔记</p>
+                <div class="flex items-center gap-2 mt-2">
+                  <span class="text-[11px] font-mono font-medium text-ink-300 bg-surface-200 px-2 py-0.5 rounded-full">contrast</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 flex-shrink-0 mt-0.5">
+                <span class="text-xs text-ink-400 font-medium">已跳过</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Inspirational closing text -->
+    <section class="animate-fade-in-up animate-fade-in-up-delay-5 mb-12">
+      <div class="bg-brand-50 rounded-brand px-6 py-6 text-center">
+        <p class="text-base text-ink-500 leading-relaxed italic">
+          "你的阅读生命线正在生长。每一条新节点都可能在未来被另一段想法找回。"
+        </p>
+      </div>
+    </section>
+
+    <!-- Action buttons -->
+    <section class="animate-fade-in-up animate-fade-in-up-delay-6 flex flex-col items-center gap-3">
+      <button data-dom-id="btn-continue-input" class="w-full max-w-xs bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white text-sm font-medium py-3 px-6 rounded-full transition-colors duration-200 shadow-sm">
+        继续录入新想法
+      </button>
+      <button class="w-full max-w-xs bg-surface-200 text-ink-400 text-sm font-medium py-3 px-6 rounded-full cursor-not-allowed" disabled>
+        查看完整生命线
+      </button>
+      <button class="text-xs text-ink-400 hover:text-ink-500 font-medium mt-1 transition-colors">
+        分享这条生命线片段
+      </button>
+    </section>
+
+  </main>
+
+</body>
+</html>

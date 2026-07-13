@@ -1,0 +1,365 @@
+:root {
+  --blue: #007AFF;
+  --blue-hover: #0062CC;
+  --blue-bg: #E8F2FF;
+  --green: #34C759;
+  --green-bg: rgba(52, 199, 89, 0.08);
+  --orange: #FF9500;
+  --orange-bg: rgba(255, 149, 0, 0.08);
+  --purple: #AF52DE;
+  --purple-bg: rgba(175, 82, 222, 0.08);
+  --text-primary: #1D1D1F;
+  --text-secondary: #3C3C43;
+  --text-tertiary: #6E6E73;
+  --text-quaternary: #8E8E93;
+  --text-quinary: #AEAEB2;
+  --text-placeholder: #C7C7CC;
+  --fill-primary: #FFFFFF;
+  --fill-secondary: #F2F2F7;
+  --fill-tertiary: #E5E5EA;
+  --fill-quaternary: #D1D1D6;
+  --fill-context: #F9F9FB;
+  --separator: #E5E5EA;
+  --separator-light: #F2F2F7;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 24px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Helvetica', 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--fill-secondary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: var(--fill-secondary);
+  position: relative;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+button:active:not(:disabled) {
+  opacity: 0.6;
+  transform: scale(0.97);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+a {
+  transition: opacity 0.15s ease;
+}
+
+a:active {
+  opacity: 0.6;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* ===== v3 design animations ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes echo-pulse {
+  0% { transform: scale(0.4); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rippleExpand {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* ===== Spatial Design (visionOS-inspired) ===== */
+
+.spatial-container {
+  position: relative;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Liquid Glass — visionOS 玻璃材质系统
+ * 基于 Apple HIG: Materials > Liquid Glass
+ * regular 变体：用于导航、按钮等功能层
+ * clear 变体：用于悬浮在丰富内容之上的组件
+ */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.65);
+}
+
+.liquid-glass-soft {
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(16px) saturate(165%);
+  -webkit-backdrop-filter: blur(16px) saturate(165%);
+  border: 0.5px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.45);
+}
+
+.liquid-glass-empty {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.04),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.3);
+}
+
+.liquid-glass-clear {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.08),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* 深度阴影系统 — 基于 visionOS 深度层次
+ * depth-1: 内容层，最浅
+ * depth-2: 卡片层，中等
+ * depth-3: 功能层，最深（导航、按钮）
+ */
+.depth-shadow-1 {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.depth-shadow-2 {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.07),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.depth-shadow-3 {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 展品卡片漂浮动画 */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(0.3deg); }
+}
+
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-2px) scale(1.005); }
+}
+
+.float-card {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.float-card:nth-child(2) {
+  animation-delay: -2s;
+}
+
+.float-card:nth-child(3) {
+  animation-delay: -4s;
+}
+
+.float-card:nth-child(4) {
+  animation-delay: -1s;
+}
+
+/* 环境层纹理 — visionOS 风格的柔光环境
+ * 模拟空间中来自不同方向的柔和环境光
+ */
+.env-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(0, 122, 255, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(52, 199, 89, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(175, 82, 222, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 70% 15%, rgba(255, 149, 0, 0.15) 0%, transparent 35%);
+  filter: blur(80px);
+}
+
+/* 深度层标签 */
+.depth-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-quaternary);
+  letter-spacing: 0.04em;
+}
+
+/* 发光效果 — 用于交互元素的 hover/active 状态
+ * 模拟 visionOS 中元素被注视时的发光反馈
+ */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 rgba(0, 122, 255, 0),
+      0 4px 20px rgba(0, 122, 255, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(0, 122, 255, 0.3),
+      0 4px 24px rgba(0, 122, 255, 0.35);
+  }
+}
+
+.glow-hover:hover {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-card {
+    animation: none !important;
+  }
+  .glow-hover:hover {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-pulse,
+  .animate-spin,
+  .animate-shake {
+    animation: none !important;
+  }
+  button[style*="animation: fadeInUp"] {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  div[style*="animation: fadeIn"],
+  div[style*="animation: slideUp"] {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
